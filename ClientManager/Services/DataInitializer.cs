@@ -25,6 +25,12 @@ namespace ClientManager.Services
         /// <summary>
         /// Initializes the database with sample data if no clients exist.
         /// </summary>
+        /// <exception cref="DbUpdateException">
+        /// Thrown when an error occurs while saving data to the database.
+        /// </exception>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an unexpected error occurs during database initialization.
+        /// </exception>
         public void Initialize()
         {
             try

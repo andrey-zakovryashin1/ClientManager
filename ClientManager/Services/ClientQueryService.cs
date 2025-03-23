@@ -33,6 +33,9 @@ namespace ClientManager.Services
         /// <param name="page">The current page number for pagination.</param>
         /// <param name="pageSize">The number of clients to display per page.</param>
         /// <returns>A list of clients matching the specified criteria.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while retrieving clients.
+        /// </exception>
         public async Task<IEnumerable<Client>> GetClientsAsync(string filterText, SortState sortOrder, int page, int pageSize)
         {
             try
@@ -57,6 +60,9 @@ namespace ClientManager.Services
         /// </summary>
         /// <param name="filterText">The search term used to filter clients.</param>
         /// <returns>The total number of clients matching the filter.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while counting clients.
+        /// </exception>
         public async Task<int> GetClientsCountAsync(string filterText)
         {
             try
@@ -79,6 +85,9 @@ namespace ClientManager.Services
         /// <param name="query">The query to filter.</param>
         /// <param name="filterText">The search term used to filter clients.</param>
         /// <returns>The filtered query.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while applying the filter.
+        /// </exception>
         internal IQueryable<Client> ApplyFilter(IQueryable<Client> query, string filterText)
         {
             try
@@ -114,6 +123,9 @@ namespace ClientManager.Services
         /// <param name="query">The query to sort.</param>
         /// <param name="sortOrder">The sorting criteria.</param>
         /// <returns>The sorted query.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while applying sorting.
+        /// </exception>
         internal IQueryable<Client> ApplySorting(IQueryable<Client> query, SortState sortOrder)
         {
             try
@@ -148,6 +160,9 @@ namespace ClientManager.Services
         /// <param name="page">The current page number.</param>
         /// <param name="pageSize">The number of items per page.</param>
         /// <returns>The paginated query.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while applying pagination.
+        /// </exception>
         internal IQueryable<Client> ApplyPagination(IQueryable<Client> query, int page, int pageSize)
         {
             try

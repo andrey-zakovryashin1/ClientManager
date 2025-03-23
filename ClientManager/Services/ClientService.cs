@@ -33,6 +33,9 @@ namespace ClientManager.Services
         /// <param name="page">The current page number for pagination.</param>
         /// <param name="pageSize">The number of clients to display per page.</param>
         /// <returns>A list of clients matching the specified criteria.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while retrieving clients.
+        /// </exception>
         public async Task<IEnumerable<Client>> GetClientsAsync(string filterText, SortState sortOrder, int page, int pageSize)
         {
             try
@@ -51,6 +54,9 @@ namespace ClientManager.Services
         /// </summary>
         /// <param name="filterText">The search text used to filter clients.</param>
         /// <returns>The total number of clients matching the filter.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while counting clients.
+        /// </exception>
         public async Task<int> GetClientsCountAsync(string filterText)
         {
             try
@@ -69,6 +75,9 @@ namespace ClientManager.Services
         /// </summary>
         /// <param name="id">The ID of the client to retrieve.</param>
         /// <returns>The client with the specified ID or null if not found.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while retrieving a client by ID.
+        /// </exception>
         public async Task<Client?> GetClientByIdAsync(int id)
         {
             try
@@ -86,6 +95,15 @@ namespace ClientManager.Services
         /// Deletes a client by its ID. If the client has an associated address, it is also deleted.
         /// </summary>
         /// <param name="id">The ID of the client to delete.</param>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the client with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="DbUpdateException">
+        /// Thrown when an error occurs while deleting the client from the database.
+        /// </exception>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an unexpected error occurs while deleting a client.
+        /// </exception>
         public async Task DeleteClientAsync(int id)
         {
             try
@@ -124,6 +142,18 @@ namespace ClientManager.Services
         /// Updates the details of an existing client including its address if provided.
         /// </summary>
         /// <param name="client">The client object containing updated details.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the provided client object is null.
+        /// </exception>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the client with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="DbUpdateException">
+        /// Thrown when an error occurs while updating the client in the database.
+        /// </exception>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an unexpected error occurs while updating a client.
+        /// </exception>
         public async Task UpdateClientAsync(Client client)
         {
             if (client == null)
@@ -193,6 +223,18 @@ namespace ClientManager.Services
         /// Updates the details of an existing address.
         /// </summary>
         /// <param name="address">The address object containing updated details.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the provided address object is null.
+        /// </exception>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the address with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="DbUpdateException">
+        /// Thrown when an error occurs while updating the address in the database.
+        /// </exception>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an unexpected error occurs while updating an address.
+        /// </exception>
         public async Task UpdateAddressAsync(Address address)
         {
             if (address == null)

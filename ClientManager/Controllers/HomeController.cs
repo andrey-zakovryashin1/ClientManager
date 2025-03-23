@@ -39,6 +39,9 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A view containing the filtered, sorted and paginated list of clients or a JSON response if requested.
         /// </returns>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while retrieving clients.
+        /// </exception>
         [HttpGet]
         public async Task<IActionResult> Index(string filterText, int page = 1, SortState sortOrder = SortState.FirstNameAsc)
         {
@@ -95,6 +98,12 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A JSON response indicating success or failure, or a redirect to the Index page for HTML requests.
         /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the client with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while deleting the client.
+        /// </exception>
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,6 +142,9 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A view containing the edit form or a JSON response with client's details if requested.
         /// </returns>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while retrieving the client.
+        /// </exception>
         [HttpGet]
         public async Task<IActionResult> EditClient(int? id)
         {
@@ -191,6 +203,12 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A JSON response indicating success or failure, or a redirect to the Index page for HTML requests.
         /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the client with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while updating the client.
+        /// </exception>
         [HttpPost]
         public async Task<IActionResult> EditClient(Client client)
         {
@@ -271,6 +289,9 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A view containing the edit form or a JSON response with the address details if requested.
         /// </returns>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while retrieving the client's address.
+        /// </exception>
         [HttpGet]
         public async Task<IActionResult> EditAddress(int? id)
         {
@@ -324,6 +345,12 @@ namespace ClientManager.Controllers
         /// <returns>
         /// A JSON response indicating success or failure, or a redirect to the Index page for HTML requests.
         /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        /// Thrown when the address with the specified ID is not found.
+        /// </exception>
+        /// <exception cref="Exception">
+        /// Thrown when an unexpected error occurs while updating the address.
+        /// </exception>
         [HttpPost]
         public async Task<IActionResult> EditAddress(Address address)
         {

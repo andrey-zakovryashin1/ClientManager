@@ -24,6 +24,9 @@ namespace ClientManager.Middleware
         /// Invokes the middleware to process the HTTP request.
         /// </summary>
         /// <param name="context">The HTTP context for the request.</param>
+        /// <exception cref="Exception">
+        /// Thrown when an unhandled exception occurs during request processing.
+        /// </exception>
         public async Task InvokeAsync(HttpContext context)
         {
             try

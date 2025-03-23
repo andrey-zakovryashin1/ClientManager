@@ -54,6 +54,12 @@ namespace ClientManager.TagHelpers
         /// </summary>
         /// <param name="context">The context for the tag helper.</param>
         /// <param name="output">The output for the tag helper.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when <see cref="PageModel"/> is not set.
+        /// </exception>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an unexpected error occurs during tag helper processing.
+        /// </exception>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             try
@@ -102,6 +108,9 @@ namespace ClientManager.TagHelpers
         /// <param name="pageNumber">The page number for the tag.</param>
         /// <param name="urlHelper">The URL helper for generating the link.</param>
         /// <returns>The created tag.</returns>
+        /// <exception cref="ApplicationException">
+        /// Thrown when an error occurs while creating a pagination tag.
+        /// </exception>
         TagBuilder CreateTag(int pageNumber, IUrlHelper urlHelper)
         {
             try

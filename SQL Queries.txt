@@ -1,3 +1,12 @@
+Запросы на SQL
+
+a. Количество клиентов:
+SELECT COUNT(*) AS clients_count
+FROM clients;
+
+b. Перечень городов и количество клиентов, проживающих в указанном городе:
+SELECT a.city, COUNT(c.Id) AS clients_count
+FROM address a
 JOIN clients c ON a.Id = c.addressId
 GROUP BY a.city;
 

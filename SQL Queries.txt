@@ -1,0 +1,29 @@
+JOIN clients c ON a.Id = c.addressId
+GROUP BY a.city;
+
+c. Перечень городов, в которых проживает более одного клиента:
+SELECT a.city, COUNT(c.Id) AS clients_count
+FROM address a
+JOIN clients c ON a.Id = c.addressId
+GROUP BY a.city
+HAVING COUNT(c.Id) > 1;
+
+Поскольку поле address в таблице clients указано как subform, здесь для удобства подразумевается, что в таблице clients есть поле addressId, связывающее клиента и его адрес: addressId в таблице clients совпадает с первичным ключом id в таблице address. 
+Если поле addressId отсутствует, для связи таблиц clients и address может быть использована комбинация полей, которая однозначно идентифицирует запись в таблице address (такой подход может быть неэффективным с точки зрения производительности). Например, это может быть комбинация полей streetAddress, city, state и zip:
+
+a. Количество клиентов:
+SELECT COUNT(*) AS clients_count
+FROM clients;
+
+b. Перечень городов и количество клиентов, проживающих в указанном городе:
+SELECT a.city, COUNT(c.Id) AS client_count
+FROM clients c
+JOIN address a ON c.address = CONCAT(a.streetAddress, ', ', a.city, ', ', a.state, ' ', a.zip)
+GROUP BY a.city;
+
+c. Перечень городов, в которых проживает более одного клиента:
+SELECT a.city
+FROM clients c
+JOIN address a ON c.address = CONCAT(a.streetAddress, ', ', a.city, ', ', a.state, ' ', a.zip)
+GROUP BY a.city
+HAVING COUNT(c.Id) > 1;

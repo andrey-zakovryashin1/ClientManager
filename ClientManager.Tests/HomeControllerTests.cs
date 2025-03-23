@@ -10,12 +10,20 @@ using ClientManager.Services;
 
 namespace ClientManager.Tests
 {
+    /// <summary>
+    /// Test class for the <see cref="HomeController"/>.
+    /// Contains unit tests to verify the functionality of the <see cref="HomeController"/> methods.
+    /// </summary>
     public class HomeControllerTests
     {
         private readonly Mock<IClientService> mockClientService;
         private readonly Mock<ILogger<HomeController>> mockLogger;
         private readonly HomeController controller;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeControllerTests"/> class.
+        /// Sets up the mock dependencies and initializes the <see cref="HomeController"/>.
+        /// </summary>
         public HomeControllerTests()
         {
             mockClientService = new Mock<IClientService>();
@@ -23,6 +31,9 @@ namespace ClientManager.Tests
             controller = new HomeController(mockClientService.Object, mockLogger.Object);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.Index"/> method returns a <see cref="ViewResult"/> with a list of clients.
+        /// </summary>
         [Fact]
         public async Task Index_ReturnsViewResult_WithListOfClients()
         {
@@ -54,6 +65,9 @@ namespace ClientManager.Tests
             Assert.Equal(2, model.Clients.Count());
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.Index"/> method returns a <see cref="JsonResult"/> when the "Accept" header is set to "application/json".
+        /// </summary>
         [Fact]
         public async Task Index_ReturnsJsonResult_WhenAcceptHeaderIsApplicationJson()
         {
@@ -83,6 +97,9 @@ namespace ClientManager.Tests
             Assert.NotNull(jsonResult.Value);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.Index"/> method sorts clients by first name in ascending order.
+        /// </summary>
         [Fact]
         public async Task Index_SortsClientsByFirstNameAsc()
         {
@@ -116,6 +133,9 @@ namespace ClientManager.Tests
             Assert.Equal("John", model.Clients.Last().FirstName);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.Delete"/> method returns a JSON response indicating success when a client is deleted.
+        /// </summary>
         [Fact]
         public async Task Delete_ReturnsJsonSuccess_WhenClientIsDeleted()
         {
@@ -143,6 +163,9 @@ namespace ClientManager.Tests
             Assert.Equal("Client deleted successfully", jsonResponse.Message);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.Delete"/> method returns a JSON response indicating failure when the client is not found.
+        /// </summary>
         [Fact]
         public async Task Delete_ReturnsNotFound_WhenClientNotFound()
         {
@@ -170,6 +193,9 @@ namespace ClientManager.Tests
             Assert.Equal("Client not found", jsonResponse.Message);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.EditClient"/> method returns a <see cref="ViewResult"/> with the client data.
+        /// </summary>
         [Fact]
         public async Task EditClient_ReturnsViewResult_WithClient()
         {
@@ -194,6 +220,9 @@ namespace ClientManager.Tests
             Assert.Equal(1, model.Id);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.EditClient"/> method redirects to the "Index" action after successfully updating a client.
+        /// </summary>
         [Fact]
         public async Task EditClient_ReturnsRedirectToIndex_WhenClientIsUpdated()
         {
@@ -217,6 +246,9 @@ namespace ClientManager.Tests
             Assert.Equal("Index", redirectResult.ActionName);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.EditAddress"/> method returns a <see cref="ViewResult"/> with the address data.
+        /// </summary>
         [Fact]
         public async Task EditAddress_ReturnsViewResult_WithAddress()
         {
@@ -241,6 +273,9 @@ namespace ClientManager.Tests
             Assert.Equal("123 Main St", model.StreetAddress);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.EditAddress"/> method redirects to the "Index" action after successfully updating an address.
+        /// </summary>
         [Fact]
         public async Task EditAddress_ReturnsRedirectToIndex_WhenAddressIsUpdated()
         {
@@ -271,6 +306,9 @@ namespace ClientManager.Tests
             Assert.Equal("Index", redirectResult.ActionName);
         }
 
+        /// <summary>
+        /// Tests that the <see cref="HomeController.HandleException"/> method returns a JSON response when the "Accept" header is set to "application/json".
+        /// </summary>
         [Fact]
         public void HandleException_ReturnsJson_WhenAcceptHeaderIsApplicationJson()
         {

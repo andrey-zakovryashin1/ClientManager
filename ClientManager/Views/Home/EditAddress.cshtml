@@ -1,0 +1,36 @@
+﻿@model ClientManager.Models.Address
+
+<!--
+    Edit Address View:
+    Displays a form for editing an address.
+    Includes fields for street address, city, state and ZIP code.
+    Validation messages are displayed for invalid inputs.
+-->
+
+<h2>Edit Address</h2>
+<form asp-action="EditAddress" asp-controller="Home" method="post">
+    <input type="hidden" asp-for="Id" />
+    <p>
+        <label asp-for="StreetAddress">Street Address</label><br />
+        <input type="text" asp-for="StreetAddress" />
+        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="City">City</label><br />
+        <input type="text" asp-for="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="State">State</label><br />
+        <input type="text" asp-for="State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Zip">ZIP</label><br />
+        <input type="text" asp-for="Zip" />
+        <span asp-validation-for="Zip" class="text-danger"></span>
+    </p>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</form>

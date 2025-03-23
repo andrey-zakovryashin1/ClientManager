@@ -1,0 +1,66 @@
+﻿@model ClientManager.Models.Client
+
+<!--
+    Edit Client View:
+    Displays a form for editing client's details including its address.
+    Includes fields for first name, last name, email, phone, description and address.
+    Validation messages are displayed for invalid inputs.
+-->
+
+<h2>Edit client</h2>
+<form asp-action="editClient" asp-controller="home" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="FirstName">First Name</label><br />
+        <input type="text" asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="LastName">Last Name</label><br />
+        <input type="text" asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Email">Email</label><br />
+        <input type="email" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Phone">Phone</label><br />
+        <input type="tel" asp-for="Phone" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Description">Description</label><br />
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </p>
+
+    <fieldset>
+        <legend>Address</legend>
+        <p>
+            <label asp-for="Address.StreetAddress">Street Address</label><br />
+            <input type="text" asp-for="Address.StreetAddress" />
+            <span asp-validation-for="Address.StreetAddress" class="text-danger"></span>
+        </p>
+        <p>
+            <label asp-for="Address.City">City</label><br />
+            <input type="text" asp-for="Address.City" />
+            <span asp-validation-for="Address.City" class="text-danger"></span>
+        </p>
+        <p>
+            <label asp-for="Address.State">State</label><br />
+            <input type="text" asp-for="Address.State" />
+            <span asp-validation-for="Address.State" class="text-danger"></span>
+        </p>
+        <p>
+            <label asp-for="Address.Zip">ZIP</label><br />
+            <input type="text" asp-for="Address.Zip" />
+            <span asp-validation-for="Address.Zip" class="text-danger"></span>
+        </p>
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</form>
+
